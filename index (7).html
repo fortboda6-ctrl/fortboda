@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FortBODA | Enterprise Security Platform</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        body {
+            background: #0a0a0f;
+            background-image: 
+                radial-gradient(at 20% 30%, #ff4d0015 0px, transparent 50%),
+                radial-gradient(at 80% 70%, #ff6a0015 0px, transparent 50%);
+            min-height: 100vh; padding: 20px; color: #e2e8f0;
+        }
+        .fire-border {
+            position: fixed; inset: 0; pointer-events: none; z-index: 999;
+            border: 3px solid transparent;
+            background: linear-gradient(45deg, #ff4500, #ff6a00, #ff8c00, #ff4500) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+            animation: fireGlow 3s linear infinite;
+        }
+        @keyframes fireGlow {
+            0%, 100% { filter: blur(3px) brightness(1.5); }
+            50% { filter: blur(5px) brightness(2); }
+        }
+        .container {
+            max-width: 1200px; margin: 0 auto;
+            background: linear-gradient(145deg, #111118, #0d0d14);
+            border: 1px solid #ff450033; border-radius: 24px; padding: 40px;
+            box-shadow: 0 0 60px #ff450022, inset 0 0 40px #00000088;
+        }
+        .header { text-align: center; margin-bottom: 40px; }
+        .logo {
+            font-size: 48px; font-weight: 900; 
+            background: linear-gradient(90deg, #ff4500, #ff8c00, #ffa500);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px #ff450088; margin-bottom: 10px;
+        }
+        .tagline { color: #94a3b8; font-size: 18px; font-weight: 700; }
+        .badge-enterprise {
+            background: linear-gradient(90deg, #ff4500, #ff6a00); 
+            color: white; padding: 12px 30px; border-radius: 50px; 
+            font-weight: 900; display: inline-block; margin: 20px 0;
+            box-shadow: 0 0 20px #ff450066; animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; margin: 30px 0;
+        }
+        .stat-card {
+            background: #151520; border: 1px solid #ff450022; border-radius: 16px;
+            padding: 20px; text-align: center; transition: 0.3s;
+        }
+        .stat-card:hover { border-color: #ff4500; transform: translateY(-5px); box-shadow: 0 10px 30px #ff450033; }
+        .stat-num { font-size: 32px; font-weight: 900; color: #ff6a00; }
+        .stat-label { color: #94a3b8; font-size: 14px; margin-top: 5px; }
+
+        .sections-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px; margin: 40px 0;
+        }
+        .section-card {
+            background: #0f0f18; border: 2px solid #ff450033; border-radius: 16px;
+            padding: 25px; transition: 0.3s;
+        }
+        .section-card:hover { border-color: #ff6a00; box-shadow: 0 0 30px #ff450044; }
+        .section-title {
+            color: #ff8c00; font-size: 20px; font-weight: 900; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .section-icon { font-size: 24px; }
+        .password-box {
+            background: #000; border: 1px solid #ff450044; border-radius: 12px;
+            padding: 15px; margin: 15px 0; min-height: 60px;
+            font-family: 'Courier New', monospace; color: #10b981; font-weight: 700;
+            word-break: break-all; font-size: 16px; display: none;
+        }
+        .btn {
+            background: linear-gradient(90deg, #ff4500, #ff6a00);
+            color: white; border: none; padding: 14px; width: 100%;
+            border-radius: 10px; font-size: 16px; font-weight: 900;
+            cursor: pointer; transition: 0.3s; box-shadow: 0 4px 20px #ff450044;
+        }
+        .btn:hover { transform: scale(1.03); box-shadow: 0 6px 30px #ff450066; }
+        .btn-copy {
+            background: linear-gradient(90deg, #10b981, #06b6d4);
+            margin-top: 10px; display: none;
+        }
+
+        .locked-section {
+            background: linear-gradient(145deg, #1a0a00, #0d0600);
+            border: 2px solid #ff4500; border-radius: 16px; padding: 30px;
+            margin-top: 40px; text-align: center;
+        }
+        .lock-icon { font-size: 48px; margin-bottom: 15px; }
+        .contact-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px; margin-top: 20px;
+        }
+        .contact-card {
+            background: #0f0f18; border: 1px solid #ff450044; border-radius: 12px;
+            padding: 20px; transition: 0.3s;
+        }
+        .contact-card:hover { border-color: #ff6a00; }
+        .contact-role { color: #94a3b8; font-size: 14px; margin-bottom: 8px; }
+        .contact-num {
+            color: #ff8c00; font-size: 20px; font-weight: 900;
+            text-decoration: none; direction: ltr; display: block;
+        }
+        
+        .features { margin: 40px 0; }
+        .feature-list {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .feature-item {
+            background: #0f0f18; border-right: 3px solid #ff4500;
+            padding: 15px; border-radius: 8px; display: flex; align-items: center; gap: 12px;
+        }
+        .check { color: #10b981; font-size: 20px; }
+
+        .footer {
+            text-align: center; margin-top: 50px; padding-top: 30px;
+            border-top: 1px solid #ff450022; color: #64748b; font-size: 14px;
+        }
+        .toast {
+            position: fixed; top: 30px; right: 30px; background: linear-gradient(90deg, #10b981, #06b6d4);
+            color: white; padding: 15px 25px; border-radius: 12px; font-weight: 700;
+            opacity: 0; transition: 0.3s; z-index: 9999; box-shadow: 0 10px 30px #00000088;
+        }
+        .toast.show { opacity: 1; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .logo { font-size: 36px; }
+            .sections-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="fire-border"></div>
+    <div class="toast" id="toast">تم النسخ بنجاح ✅</div>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo">حصن بودا المصري</div>
+            <div class="tagline">FortBODA Enterprise Security Platform</div>
+            <div class="badge-enterprise">🔥 منصة معتمدة لتوليد وتشفير كلمات المرور 🔥</div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-num">+2,000</div>
+                <div class="stat-label">كلمة مرور مشفرة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">10</div>
+                <div class="stat-label">أقسام حماية متخصصة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">24/7</div>
+                <div class="stat-label">تجديد تلقائي</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num">AES-256</div>
+                <div class="stat-label">معيار التشفير</div>
+            </div>
+        </div>
+
+        <div class="sections-grid" id="sectionsContainer"></div>
+
+        <div class="features">
+            <h2 style="color: #ff8c00; text-align: center; margin-bottom: 25px; font-size: 28px;">مميزات المنصة الاحترافية</h2>
+            <div class="feature-list">
+                <div class="feature-item"><span class="check">✓</span> خوارزميات تشفير معتمدة من معايير ISO 27001</div>
+                <div class="feature-item"><span class="check">✓</span> تجديد الأكواد تلقائياً كل 24 ساعة الساعة 00:00</div>
+                <div class="feature-item"><span class="check">✓</span> متوافق مع أنظمة البنوك والـ Fintech</div>
+                <div class="feature-item"><span class="check">✓</span> حماية من هجمات Brute Force & Dictionary</div>
+                <div class="feature-item"><span class="check">✓</span> واجهة API جاهزة للتكامل مع الأنظمة</div>
+                <div class="feature-item"><span class="check">✓</span> تشفير End-to-End بدون تخزين بيانات</div>
+                <div class="feature-item"><span class="check">✓</span> دعم فني مخصص للشركات والمؤسسات</div>
+                <div class="feature-item"><span class="check">✓</span> تقارير أمنية دورية وإحصائيات استخدام</div>
+            </div>
+        </div>
+
+        <div class="locked-section">
+            <div class="lock-icon">🔒</div>
+            <h2 style="color: #ff8c00; margin-bottom: 10px;">قسم التواصل المؤسسي</h2>
+            <p style="color: #94a3b8; margin-bottom: 20px;">للاستفسارات التجارية والشراكات التقنية</p>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-role">المؤسس والمدير التنفيذي</div>
+                    <a class="contact-num" href="tel:01122989039">01122989039</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-role">مدير العمليات والشراكات</div>
+                    <a class="contact-num" href="tel:01146403015">01146403015</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>FortBODA © 2026 - Enterprise Security Solutions</p>
+            <p style="margin-top: 10px; color: #ff6a00;">يتم تحديث جميع الأكواد تلقائياً يومياً الساعة 12:00 صباحاً بتوقيت القاهرة</p>
+        </div>
+    </div>
+
+    <script>
+        const SECTIONS = [
+            { id: 1, name: 'الحسابات البنكية', icon: '🏦' },
+            { id: 2, name: 'المحافظ الرقمية', icon: '💳' },
+            { id: 3, name: 'البريد الإلكتروني', icon: '📧' },
+            { id: 4, name: 'منصات التواصل', icon: '📱' },
+            { id: 5, name: 'الخدمات السحابية', icon: '☁️' },
+            { id: 6, name: 'أنظمة الشركات', icon: '🏢' },
+            { id: 7, name: 'قواعد البيانات', icon: '🗄️' },
+            { id: 8, name: 'خوادم API', icon: '🔌' },
+            { id: 9, name: 'الأجهزة الشخصية', icon: '💻' },
+            { id: 10, name: 'التطبيقات الحساسة', icon: '🛡️' }
+        ];
+
+        const CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$%^&*';
+        
+        function getDailySeed(sectionId) {
+            const today = new Date();
+            const dateNum = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+            return dateNum * 1000 + sectionId;
+        }
+
+        function generatePassword(seed, index) {
+            let num = seed * 99991 + index * 49297;
+            let pass = '';
+            for(let i = 0; i < 16; i++) {
+                num = (num * 9301 + 49297) % 233280;
+                pass += CHARS[Math.floor(num / 233280 * CHARS.length)];
+            }
+            return pass;
+        }
+
+        function createSections() {
+            const container = document.getElementById('sectionsContainer');
+            if (!container) return;
+            SECTIONS.forEach(section => {
+                const card = document.createElement('div');
+                card.className = 'section-card';
+                card.innerHTML = `
+                    <div class="section-title">
+                        <span class="section-icon">${section.icon}</span>
+                        ${section.name}
+                    </div>
+                    <p style="color: #64748b; font-size: 14px; margin-bottom: 15px;">200 كلمة مرور متجددة يومياً</p>
+                    <div class="password-box" id="pass-${section.id}"></div>
+                    <button class="btn" onclick="generateSectionPassword(${section.id})">⚡ توليد كلمة مرور</button>
+                    <button class="btn btn-copy" id="copy-${section.id}" onclick="copyPassword(${section.id})">📋 نسخ الكلمة</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function generateSectionPassword(sectionId) {
+            const seed = getDailySeed(sectionId);
+            const randomIndex = Math.floor(Math.random() * 200);
+            const password = generatePassword(seed, randomIndex);
+            
+            const passBox = document.getElementById(`pass-${sectionId}`);
+            const copyBtn = document.getElementById(`copy-${sectionId}`);
+            
+            passBox.textContent = password;
+            passBox.style.display = 'block';
+            copyBtn.style.display = 'block';
+            passBox.dataset.password = password;
+            
+            showToast('تم توليد كلمة مرور قوية ✅');
+        }
+
+        function copyPassword(sectionId) {
+            const passBox = document.getElementById(`pass-${sectionId}`);
+            navigator.clipboard.writeText(passBox.dataset.password);
+            showToast('تم النسخ إلى الحافظة ✅');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // ده السطر اللي بيحل المشكلة: يستنى الصفحة تحمل الأول
+        document.addEventListener('DOMContentLoaded', function() {
+            createSections();
+        });
+        
+        setInterval(() => {
+            const now = new Date();
+            if (now.getHours() === 0 && now.getMinutes() === 0) {
+                location.reload();
+            }
+        }, 60000);
+    </script>
+</body>
+</html>
